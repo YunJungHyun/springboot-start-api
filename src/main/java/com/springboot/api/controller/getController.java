@@ -2,6 +2,8 @@ package com.springboot.api.controller;
 
 
 import com.springboot.api.dto.MemberDTO;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.web.bind.annotation.*;
 
 import java.lang.reflect.Member;
@@ -42,6 +44,7 @@ public class getController {
     }
 
     // http://localhost:8080/api/v1/get-api/request1?name=value1&email=value2&organization=value3
+    @ApiOperation(value = "GET 메서드 예제", notes = "@RequestParam을 활용한 GET Method")
     @GetMapping(value = "/request1")
     public String getRequestParam1(
             @RequestParam String name,
@@ -51,11 +54,7 @@ public class getController {
 
 
                 return name+" "+email+" "+organization;
-            }
-
-            // http://localhost:8080/api/v1/get-api/request2?key1=value1&key2=value2&key3=value3
-
-
+    }
 
     // http://localhost:8080/api/v1/get-api/request2?key1=value1&key2=value2&key3=value3
     @GetMapping(value = "/request2")
@@ -73,6 +72,19 @@ public class getController {
 
 
         return memberDTO.toString();
+    }
+
+    // http://localhost:8080/api/v1/get-api/request1?name=value1&email=value2&organization=value3
+    @ApiOperation(value = "GET 메서드 예제", notes = "@RequestParam을 활용한 GET Method")
+    @GetMapping(value = "/request4")
+    public String getRequestParam4(
+            @ApiParam(value="이름", required = true)  @RequestParam String name,
+            @ApiParam(value="이메일", required = true)  @RequestParam String email,
+            @ApiParam(value="회사", required = true)  @RequestParam String organization
+    ){
+
+
+        return name+" "+email+" "+organization;
     }
 
 }

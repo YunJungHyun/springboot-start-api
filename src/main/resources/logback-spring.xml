@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration>
+
+    <property name="LOG_PATH" value="./logs/"/>
+
+    <!-- Appenders-->
+    <!-- 로그의 형태를 설정하고 어떤 방법으로 출력할지를 설정하는 곳-->
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender"> <!-- 콘솔에 로그를 출력 -->
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+
+            <level>INFO</level>
+        </filter>
+        <encoder>
+            <!-- %logger  로거의 이름 -->
+            <!-- %-5level 로그레벨, -5는 출력 고정폭의 값-->
+            <!-- %msg(%message) 로그 메시지-->
+            <pattern>[%d{yyyy-MM-dd HH:mm:ss}] [%-5level] [%thread] %logger %msg%n</pattern>
+
+        </encoder>
+    </appender>
+    <!-- 여러 개의 파일을 순회하면서 로그를 저장-->
+    <!--appender name="INFO_LOG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+
+        </filter>
+        <file>${LOG_PATH}/info.log</file>
+        <append>true</append>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedFileNamingAndTriggeringPolicy">
+            <fileNamePattern>${LOG_PATH}/info_${type}.%d{yyyy-MM-dd}.gz</fileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>[%d{yyyy-MM-dd HH:mm:ss}] [%-5level] [%thread] %logger %msg%n</pattern>
+        </encoder>
+    </appender-->
+    <!-- TRACE > DEBUG > INFO > WARN > ERROR > OFF-->
+    <!-- Root Logger-->
+    <root level="INFO">
+        <appender-ref ref="console"/>
+        <!--appender-ref ref="INFO_LOG"/-->
+    </root>
+</configuration>
